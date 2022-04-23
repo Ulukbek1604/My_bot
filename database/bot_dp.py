@@ -27,6 +27,14 @@ async def sql_command_random(message):
                          caption=f"Name: {result[r_m][1]}\n"
                                  f"Deskription: {result[r_m][2]}\n"
                                  f"Price: {result[r_m][3]}\n")
+ async def random_menu(message):
+    result = cursor.execute("SELECT * FROM menu").fetchall()
+    r_m = random.randint(0, len(result) - 1)
+    await bot.send_photo(message.chat.id, result[r_m][0])
+    await bot.send_message(message.from_user.id,
+                           f"Name: {result[r_m][1]}\n"
+                           f"Deskription: {result[r_m][2]}\n"
+                           f"Price: {result[r_m][3]}\n")
 
 
 async def sql_command_all(message):
